@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Currency Guessing Game</title>
+    <link rel="stylesheet" href="game.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: linear-gradient(135deg, #f5f7fa, #c3cfe2);
+    color: #333;
+    padding: 20px;
+}
+
+.container {
+    background: white;
+    padding: 40px;
+    border-radius: 24px;
+    box-shadow: 
+        0 20px 40px rgba(0, 0, 0, 0.1),
+        0 0 0 1px rgba(255, 255, 255, 0.2);
+    width: 100%;
+    max-width: 650px;
+    text-align: center;
+}
+
+.hidden {
+    display: none;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+    padding-bottom: 15px;
+    border-bottom: 2px solid #f0f0f0;
+    position: relative; 
+}
+
+.timer {
+    background: linear-gradient(135deg, #ff6b6b, #ffa500);
+    color: white;
+    padding: 8px 20px;
+    border-radius: 25px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    box-shadow: 0 4px 15px rgba(255, 107, 107, 0.3);
+    border: 2px solid rgba(255, 255, 255, 0.2);
+}
+
+.question-counter {
+    color: #666;
+    font-size: 1.2rem;
+    font-weight: 500;
+}
+
+.quiz-body #country-image {
+    width: 100%;
+    height: 320px;
+    object-fit: cover;
+    border-radius: 20px;
+    margin-bottom: 20px;
+    border: 3px solid rgba(255, 255, 255, 0.5);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+
+.quiz-body #country-image:hover {
+    transform: scale(1.02);
+}
+
+.quiz-body #country-name {
+    font-size: 2.2rem;
+    font-weight: 700;
+    margin-bottom: 25px;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.options-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+    margin-top: 20px;
+}
+
+.option-btn {
+    background: white;
+    border: 2px solid #e0e0e0;
+    border-radius: 16px;
+    padding: 20px 18px;
+    font-size: 1.1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    position: relative;
+    overflow: hidden;
+}
+
+.option-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(0, 123, 255, 0.1), transparent);
+    transition: left 0.5s;
+}
+
+.option-btn:hover {
+    border-color: #007bff;
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(0, 123, 255, 0.15);
+    background: #f8f9ff;
+}
+
+.option-btn:hover::before {
+    left: 100%;
+}
+
+.option-btn:active {
+    transform: translateY(0);
+}
+
+.option-btn.correct {
+    background: linear-gradient(135deg, #28a745, #20c997);
+    color: white;
+    border-color: #28a745;
+    box-shadow: 0 8px 25px rgba(40, 167, 69, 0.3);
+}
+
+.option-btn.wrong {
+    background: linear-gradient(135deg, #dc3545, #e74c3c);
+    color: white;
+    border-color: #dc3545;
+    box-shadow: 0 8px 25px rgba(220, 53, 69, 0.3);
+}
+
+#results-container h1 {
+    font-size: 2.8rem;
+    margin-bottom: 15px;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    font-weight: 700;
+}
+
+#results-container p {
+    font-size: 1.3rem;
+    color: #666;
+    margin-bottom: 35px;
+    font-weight: 400;
+}
+
+.score-summary {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 35px;
+    gap: 20px;
+}
+
+.score-item {
+    font-size: 1.4rem;
+    font-weight: 600;
+    padding: 20px;
+    border-radius: 16px;
+    background: rgba(255, 255, 255, 0.5);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    min-width: 120px;
+}
+
+.score-item span {
+    display: block;
+}
+
+.score-item.correct {
+    border-left: 4px solid #28a745;
+}
+
+.score-item.wrong {
+    border-left: 4px solid #dc3545;
+}
+
+.score-item.correct span:last-child {
+    color: #28a745;
+    font-size: 3.2rem;
+    font-weight: 700;
+    margin-top: 10px;
+}
+
+.score-item.wrong span:last-child {
+    color: #dc3545;
+    font-size: 3.2rem;
+    font-weight: 700;
+    margin-top: 10px;
+}
+
+.btn {
+    background: linear-gradient(135deg, #007bff, #0056b3);
+    color: white;
+    border: none;
+    padding: 16px 35px;
+    border-radius: 16px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+    margin-top: 15px;
+    transition: all 0.3s ease;
+    box-shadow: 0 8px 25px rgba(0, 123, 255, 0.3);
+    border: 2px solid rgba(255, 255, 255, 0.1);
+}
+
+.btn:hover {
+    background: linear-gradient(135deg, #0056b3, #004085);
+    transform: translateY(-2px);
+    box-shadow: 0 12px 30px rgba(0, 123, 255, 0.4);
+}
+
+.btn:active {
+    transform: translateY(0);
+}
+
+.popup-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(30, 41, 59, 0.7); 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    padding: 20px;
+    backdrop-filter: blur(8px); 
+}
+
+.popup-content {
+    background: white;
+    padding: 40px;
+    border-radius: 24px; 
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    max-width: 550px;
+    width: 100%;
+    animation: fadeIn 0.5s ease-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: scale(0.95); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+.popup-content h2 {
+    font-size: 2rem;
+    margin-bottom: 15px;
+    font-weight: 700;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.popup-content p {
+    font-size: 1.1rem;
+    color: #555;
+    margin-bottom: 25px;
+}
+
+.popup-content ul {
+    list-style: none;
+    padding: 0;
+    margin-bottom: 30px;
+    text-align: left;
+    display: inline-block;
+}
+
+.popup-content ul li {
+    font-size: 1rem;
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.popup-content ul li i {
+    color: #667eea;
+    font-size: 1.2rem;
+    width: 20px;
+    text-align: center;
+}
+
+#start-game-btn {
+    margin-top: 0;
+}
+
+
+.back-to-converter-btn {
+    text-decoration: none;
+    color: #888;
+    font-size: 1rem;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 12px;
+    border-radius: 12px;
+    transition: all 0.3s ease;
+}
+
+.back-to-converter-btn:hover {
+    background-color: #f0f2f5;
+    color: #333;
+}
+
+.header {
+    justify-content: space-between; 
+}
+
+
+@media (max-width: 768px) {
+    .container {
+        padding: 25px;
+        margin: 10px;
+    }
+    
+    .quiz-body #country-name {
+        font-size: 1.8rem;
+    }
+    
+    .options-grid {
+        grid-template-columns: 1fr;
+        gap: 12px;
+    }
+    
+    .score-summary {
+        flex-direction: column;
+        gap: 15px;
+    }
+    
+    #results-container h1 {
+        font-size: 2.2rem;
+    }
+
+    .header {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 15px;
+    }
+    .back-to-converter-btn {
+        width: 100%;
+        justify-content: center;
+        order: -1; 
+    }
+}
+    </style>
+</head>
+<body>
+    <div id="start-popup-overlay" class="popup-overlay">
+        <div class="popup-content">
+            <h2>Welcome to the Currency Guessing Game!</h2>
+            <p>Test your knowledge of world currencies. Here are the rules:</p>
+            <ul>
+                <li><i class="fas fa-image"></i> Look at the picture & name of the country shown.</li>
+                <li><i class="fas fa-check-square"></i> Choose the correct currency from the four options.</li>
+                <li><i class="fas fa-clock"></i> You have <strong>10 seconds</strong> for each question!</li>
+            </ul>
+            <button id="start-game-btn" class="btn">Start Playing</button>
+        </div>
+    </div>
+
+    <div class="container">
+        <div id="game-container" class="hidden"> <div class="header">
+                <a href="index.html" class="back-to-converter-btn" title="Back to Converter">
+                    <i class="fas fa-arrow-left"></i> Back
+                </a>
+                <h2 class="timer">Time: <span id="timer-display">10</span></h2>
+                <h3 class="question-counter">Question <span id="question-number">1</span>/<span id="total-questions">15</span></h3>
+            </div>
+            <div class="quiz-body">
+                <img id="country-image" src="" alt="Country Landscape">
+                <h2 id="country-name">Country</h2>
+                <div id="options-container" class="options-grid">
+                </div>
+            </div>
+        </div>
+
+        <div id="results-container" class="hidden">
+            <h1>Game Over!</h1>
+            <p>Here is your score:</p>
+            <div class="score-summary">
+                <div class="score-item correct">
+                    <span>Correct</span>
+                    <span id="correct-score">0</span>
+                </div>
+                <div class="score-item wrong">
+                    <span>Wrong</span>
+                    <span id="wrong-score">0</span>
+                </div>
+            </div>
+            <button id="play-again-btn" class="btn">Play Again</button>
+            <a href="index.html" class="btn">Back to Converter</a>
+        </div>
+    </div>
+
+    <script src="game.js"></script>
+</body>
+</html>

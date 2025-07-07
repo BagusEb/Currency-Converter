@@ -1,0 +1,819 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Currency Scrapbook - Fun Facts</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;700&family=Kalam:wght@300;700&family=Roboto+Slab:wght@400;700&family=Permanent+Marker&display=swap" rel="stylesheet">
+
+    <style>
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #deded0 0%, #e9ebe3 50%, #000000 100%);
+            background-size: 400% 400%;
+            animation: gradientShift 20s ease infinite;
+            color: #3d3d3d;
+            line-height: 1.7;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                radial-gradient(circle at 25% 25%, rgba(139, 69, 19, 0.02) 0%, transparent 50%),
+                radial-gradient(circle at 75% 75%, rgba(160, 82, 45, 0.03) 0%, transparent 50%),
+                radial-gradient(circle at 50% 50%, rgba(210, 180, 140, 0.01) 0%, transparent 70%);
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        @keyframes gradientShift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+        
+/* =========== MODERN GLASS NAVBAR =========== */
+.navbar {
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    padding: 20px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    z-index: 1000;
+    transition: all 0.3s ease;
+}
+
+.navbar:hover {
+    background: rgba(255, 255, 255, 0.2);
+    box-shadow: 0 4px 25px rgba(0, 0, 0, 0.15);
+}
+
+/* Brand Logo */
+.navbar-brand a {
+    color: #111827;
+    font-size: 1.8rem;
+    font-weight: 800;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    letter-spacing: -0.5px;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.navbar-brand a:hover {
+    color: #4f46e5;
+    transform: translateY(-1px);
+}
+
+/* Navigation Links */
+.navbar-links {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+
+.navbar-links li a {
+    color: #374151;
+    text-decoration: none;
+    font-size: 1rem;
+    font-weight: 600;
+    padding: 10px 20px;
+    border-radius: 8px;
+    transition: all 0.2s ease;
+    position: relative;
+}
+
+.navbar-links li a:hover {
+    color: #111827;
+    background: rgba(255, 255, 255, 0.3);
+    transform: translateY(-1px);
+}
+
+/* Active Link */
+.navbar-links li a.active {
+    color: #ffffff;
+    background: linear-gradient(135deg, #4f46e5, #7c3aed);
+    box-shadow: 0 4px 12px rgba(79, 70, 229, 0.3);
+}
+
+.navbar-links li a.active:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 6px 16px rgba(79, 70, 229, 0.4);
+}
+
+/* Dark Mode Support */
+@media (prefers-color-scheme: dark) {
+    .navbar {
+        background: rgba(0, 0, 0, 0.3);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    
+    .navbar:hover {
+        background: rgba(0, 0, 0, 0.4);
+    }
+    
+    .navbar-brand a {
+        color: #f9fafb;
+        text-shadow: 0 1px 2px rgba(255, 255, 255, 0.1);
+    }
+    
+    .navbar-brand a:hover {
+        color: #818cf8;
+    }
+    
+    .navbar-links li a {
+        color: #d1d5db;
+    }
+    
+    .navbar-links li a:hover {
+        color: #f9fafb;
+        background: rgba(255, 255, 255, 0.1);
+    }
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+    .navbar {
+        padding: 15px 25px;
+        flex-direction: column;
+        gap: 16px;
+        position: fixed;
+    }
+    
+    .navbar-brand a {
+        font-size: 1.5rem;
+    }
+    
+    .navbar-links {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 8px;
+    }
+    
+    .navbar-links li a {
+        font-size: 0.9rem;
+        padding: 8px 16px;
+    }
+}
+
+/* Animation for smooth transitions */
+* {
+    box-sizing: border-box;
+}
+
+.navbar * {
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Body padding untuk fixed navbar */
+body {
+    padding-top: 0; 
+}
+
+.main-content {
+    padding-top: 80px;
+}
+
+/* =========== END MODERN GLASS NAVBAR =========== */
+
+        .main-content {
+            padding-top: 120px;
+            max-width: 950px;
+            margin: 0 auto;
+            padding-left: 20px;
+            padding-right: 20px;
+        }
+
+        .facts-header {
+            text-align: center;
+            margin-bottom: 3rem;
+            position: relative;
+        }
+
+        .facts-header h1 {
+            font-family: 'Permanent Marker', cursive;
+            color: #8b4513;
+            font-size: 3.5rem;
+            transform: rotate(-1deg);
+            text-shadow: 3px 3px 6px rgba(0,0,0,0.1);
+            margin-bottom: 1rem;
+        }
+
+        .facts-header p {
+            color: #756658;
+            font-size: 1.2rem;
+            font-family: 'Caveat', cursive;
+            font-weight: 700;
+            background: rgba(255,255,255,0.8);
+            padding: 0.5rem 1.5rem;
+            border-radius: 20px;
+            display: inline-block;
+            box-shadow: 2px 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .currency-selector {
+            background: rgba(255, 250, 240, 0.9);
+            padding: 2.5rem;
+            border-radius: 20px;
+            margin-bottom: 3rem;
+            text-align: center;
+            position: relative;
+            box-shadow: 
+                0 8px 25px rgba(0,0,0,0.1),
+                inset 0 1px 0 rgba(255,255,255,0.8);
+            transform: rotate(-0.5deg);
+        }
+
+        .currency-selector::before,
+        .currency-selector::after {
+            content: '';
+            position: absolute;
+            width: 80px;
+            height: 25px;
+            background: rgba(255, 223, 186, 0.8);
+            border: 1px solid rgba(210, 180, 140, 0.5);
+            transform: rotate(45deg);
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .currency-selector::before {
+            top: -10px;
+            left: 20px;
+        }
+
+        .currency-selector::after {
+            bottom: -10px;
+            right: 30px;
+            transform: rotate(-35deg);
+        }
+
+        .currency-selector label {
+            display: block;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            color: #4a3c2f;
+            font-size: 1.4rem;
+            font-family: 'Caveat', cursive;
+        }
+
+        .currency-dropdown {
+            font-family: 'Roboto Slab', serif;
+            padding: 12px 20px;
+            border: 3px solid #d4c7b0;
+            border-radius: 15px;
+            font-size: 1.1rem;
+            background: rgba(255,255,255,0.9);
+            cursor: pointer;
+            min-width: 350px;
+            box-shadow: 3px 3px 10px rgba(0,0,0,0.1);
+            transform: rotate(0.5deg);
+        }
+        
+        .currency-hero {
+            position: relative;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 20px;
+            margin-bottom: 4rem;
+            box-shadow: 
+                0 12px 30px rgba(0,0,0,0.15),
+                inset 0 1px 0 rgba(255,255,255,0.8);
+            border-radius: 15px;
+            transform: rotate(-1deg);
+            border: 2px solid rgba(210, 180, 140, 0.3);
+        }
+
+        .currency-hero::before {
+            content: '';
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            width: 30px;
+            height: 30px;
+            background: linear-gradient(135deg, rgba(255,255,255,0.8) 45%, rgba(200,200,200,0.2) 50%, rgba(255,255,255,0.9) 55%);
+            transform: rotate(45deg);
+            box-shadow: -2px 2px 5px rgba(0,0,0,0.1);
+            z-index: 2;
+        }
+        
+        .hero-image {
+            width: 100%;
+            height: 400px;
+            overflow: hidden;
+            position: relative;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+            clip-path: polygon(
+                2% 0%, 
+                8% 3%, 
+                15% 0%, 
+                22% 4%, 
+                30% 0%, 
+                38% 2%, 
+                45% 0%, 
+                52% 5%, 
+                60% 0%, 
+                68% 3%, 
+                75% 0%, 
+                82% 4%, 
+                90% 0%, 
+                95% 2%, 
+                100% 5%, 
+                100% 15%, 
+                97% 25%, 
+                100% 35%, 
+                98% 45%, 
+                100% 55%, 
+                96% 65%, 
+                100% 75%, 
+                98% 85%, 
+                100% 95%, 
+                95% 100%, 
+                85% 97%, 
+                75% 100%, 
+                65% 96%, 
+                55% 100%, 
+                45% 98%, 
+                35% 100%, 
+                25% 95%, 
+                15% 100%, 
+                8% 97%, 
+                0% 100%, 
+                0% 90%, 
+                3% 80%, 
+                0% 70%, 
+                2% 60%, 
+                0% 50%, 
+                4% 40%, 
+                0% 30%, 
+                3% 20%, 
+                0% 10%
+            );
+        }
+
+        .hero-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.4s ease;
+            filter: sepia(5%) contrast(1.1) brightness(1.05);
+        }
+
+        .hero-image img:hover {
+            transform: scale(1.03);
+        }
+        
+        .hero-overlay {
+            text-align: center;
+            padding-top: 1.5rem;
+        }
+
+        .hero-overlay h2 {
+            font-family: 'Caveat', cursive;
+            font-size: 2.8rem;
+            color: #333;
+            font-weight: 700;
+        }
+
+        .hero-overlay p {
+            font-size: 1.1rem;
+            color: #666;
+            font-style: italic;
+            font-family: 'Caveat', cursive;
+        }
+
+        .content-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        .content-section {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 2.5rem;
+            border-radius: 15px;
+            box-shadow: 
+                0 8px 25px rgba(0,0,0,0.12),
+                inset 0 1px 0 rgba(255,255,255,0.8);
+            transition: all 0.4s ease;
+            position: relative;
+            border: 1px solid rgba(210, 180, 140, 0.3);
+        }
+
+        .content-section:nth-child(odd) { transform: rotate(0.5deg); }
+        .content-section:nth-child(even) { transform: rotate(-0.5deg); }
+        
+        .content-section:hover {
+            transform: rotate(0deg) translateY(-8px) scale(1.02);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.18);
+        }
+
+        .content-section::before {
+            content: '';
+            position: absolute;
+            top: -8px;
+            left: 15%;
+            width: 60px;
+            height: 20px;
+            background: rgba(255, 223, 186, 0.7);
+            border: 1px solid rgba(210, 180, 140, 0.4);
+            transform: rotate(-15deg);
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            z-index: 2;
+        }
+
+        .content-section:nth-child(even)::before {
+            right: 15%;
+            left: auto;
+            transform: rotate(20deg);
+        }
+
+        .section-image {
+            width: 100%;
+            height: 390px;
+            object-fit: cover;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 6px 15px rgba(0,0,0,0.15);
+            position: relative;
+            filter: sepia(3%) contrast(1.05) brightness(1.02);
+            transform: rotate(-0.3deg);
+            clip-path: polygon(
+                0% 0%, 
+                95% 0%, 
+                100% 8%, 
+                98% 15%, 
+                100% 25%, 
+                97% 35%, 
+                100% 45%, 
+                95% 55%, 
+                100% 65%, 
+                98% 75%, 
+                100% 85%, 
+                95% 92%, 
+                100% 100%, 
+                8% 100%, 
+                0% 95%, 
+                3% 85%, 
+                0% 75%, 
+                5% 65%, 
+                0% 55%, 
+                3% 45%, 
+                0% 35%, 
+                2% 25%, 
+                0% 15%, 
+                4% 8%
+            );
+        }
+
+        .section-image:nth-child(even) {
+            transform: rotate(0.4deg);
+            clip-path: polygon(
+                0% 5%, 
+                8% 0%, 
+                18% 3%, 
+                28% 0%, 
+                38% 4%, 
+                48% 0%, 
+                58% 2%, 
+                68% 0%, 
+                78% 5%, 
+                88% 0%, 
+                98% 3%, 
+                100% 8%, 
+                100% 100%, 
+                95% 100%, 
+                85% 97%, 
+                75% 100%, 
+                65% 96%, 
+                55% 100%, 
+                45% 98%, 
+                35% 100%, 
+                25% 95%, 
+                15% 100%, 
+                5% 97%, 
+                0% 100%
+            );
+        }
+
+        .section-image::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            box-shadow: inset 0 0 20px rgba(0,0,0,0.1);
+            pointer-events: none;
+        }
+
+        .content-section h3 {
+            font-family: 'Caveat', cursive;
+            color: #5a4a3b;
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+            transform: rotate(-1deg);
+        }
+
+        .content-section p, .content-section li {
+            color: #4f4f4f;
+            font-size: 1rem;
+            text-align: justify;
+            line-height: 1.8;
+        }
+
+        .content-section ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .content-section li {
+            padding-left: 2rem;
+            position: relative;
+            margin-bottom: 1rem;
+            background: rgba(255, 248, 220, 0.5);
+            padding: 0.8rem 0.8rem 0.8rem 2.5rem;
+            border-radius: 8px;
+            border-left: 4px solid #deb887;
+        }
+
+        .content-section li::before {
+            content: '📌';
+            position: absolute;
+            left: 0.5rem;
+            top: 0.8rem;
+            font-size: 1.2rem;
+        }
+        
+        .image-gallery {
+            background: transparent;
+            padding: 0;
+            margin-bottom: 4rem;
+        }
+
+        .image-gallery h3 {
+            font-family: 'Permanent Marker', cursive;
+            color: #8b4513;
+            font-size: 2.8rem;
+            margin-bottom: 2rem;
+            text-align: center;
+            transform: rotate(-1deg);
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 2.5rem;
+            padding: 1rem;
+        }
+
+        .gallery-item {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 15px 15px 40px 15px;
+            box-shadow: 
+                0 8px 20px rgba(0,0,0,0.15),
+                0 0 0 1px rgba(0,0,0,0.05);
+            position: relative;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border-radius: 3px;
+        }
+
+        .gallery-item:nth-child(1) { transform: rotate(3deg); }
+        .gallery-item:nth-child(2) { transform: rotate(-2deg); }
+        .gallery-item:nth-child(3) { transform: rotate(1deg); }
+        .gallery-item:nth-child(4) { transform: rotate(-3deg); }
+        .gallery-item:nth-child(5) { transform: rotate(2deg); }
+        .gallery-item:nth-child(6) { transform: rotate(-1deg); }
+
+        .gallery-item:hover { 
+            transform: rotate(0deg) scale(1.15) translateY(-10px); 
+            z-index: 20; 
+        }
+
+        .gallery-item::before {
+            content: '📍';
+            position: absolute;
+            top: -8px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 1.2rem;
+            z-index: 3;
+        }
+
+        .gallery-item img, .gallery-item .placeholder {
+            width: 100%;
+            height: 160px;
+            object-fit: cover;
+            filter: sepia(5%) contrast(1.05) brightness(1.02);
+            
+        }
+
+        .gallery-caption {
+            font-family: 'Caveat', cursive;
+            text-align: center;
+            font-size: 1.2rem;
+            color: #555;
+            position: absolute;
+            bottom: 8px;
+            left: 0;
+            right: 0;
+            font-weight: 700;
+        }
+
+        /* Animation */
+        .fade-in {
+            animation: fadeIn 0.8s ease-in-out forwards;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .decorative-element {
+            position: absolute;
+            pointer-events: none;
+            opacity: 0.1;
+            font-size: 3rem;
+            color: #8b4513;
+        }
+
+        .decorative-element:nth-child(1) {
+            top: 20%;
+            left: 5%;
+            transform: rotate(15deg);
+        }
+
+        .decorative-element:nth-child(2) {
+            top: 60%;
+            right: 8%;
+            transform: rotate(-20deg);
+        }
+        
+        @media (max-width: 768px) {
+            .navbar-brand a { font-size: 2rem; }
+            .navbar-links { gap: 1rem; }
+            .facts-header h1 { font-size: 2.5rem; }
+            .currency-dropdown { min-width: 100%; width: 100%; }
+            .hero-image { height: 250px; }
+            .section-image { height: 150px; }
+            .gallery-grid { grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 1.5rem; }
+            .content-section { padding: 1.5rem; }
+        }
+
+        @media (max-width: 480px) {
+            .main-content { padding-left: 15px; padding-right: 15px; }
+            .navbar { padding: 0.8rem 1rem; }
+            .currency-selector { padding: 1.5rem; transform: rotate(0deg); }
+            .content-section { transform: rotate(0deg) !important; }
+            .gallery-item { transform: rotate(0deg) !important; }
+        }
+
+    </style>
+</head>
+<body>
+    <div class="decorative-element">✂️</div>
+    <div class="decorative-element">📎</div>
+
+    <nav class="navbar">
+        <div class="navbar-brand">
+            <a href="index.html">CurrencyApp 💸</a>
+        </div>
+        <ul class="navbar-links">
+            <li><a href="index.html">Converter</a></li>
+            <li><a href="game.html">Game</a></li>
+            <li><a href="facts.html" class="active">Facts</a></li>
+        </ul>
+    </nav>
+
+    <div class="container main-content">
+        <header class="facts-header">
+            <h1>Currency Facts</h1>
+            <p>Explore the fascinating stories behind world currencies</p>
+        </header>
+
+        <section class="currency-selector">
+            <label for="currencySelect">Choose a Currency to Explore:</label>
+            <select id="currencySelect" class="currency-dropdown">
+                <option value="IDR" selected>🇮🇩 Indonesian Rupiah (IDR)</option>
+                <option value="USD">🇺🇸 US Dollar (USD)</option>
+                <option value="EUR">🇪🇺 Euro (EUR)</option>
+                <option value="JPY">🇯🇵 Japanese Yen (JPY)</option>
+                <option value="GBP">🇬🇧 British Pound (GBP)</option>
+                <option value="AUD">🇦🇺 Australian Dollar (AUD)</option>
+                <option value="CAD">🇨🇦 Canadian Dollar (CAD)</option>
+                <option value="CHF">🇨🇭 Swiss Franc (CHF)</option>
+                <option value="CNY">🇨🇳 Chinese Yuan (CNY)</option>
+                <option value="SGD">🇸🇬 Singapore Dollar (SGD)</option>
+                <option value="MYR">🇲🇾 Malaysian Ringgit (MYR)</option>
+                <option value="THB">🇹🇭 Thai Baht (THB)</option>
+                <option value="KRW">🇰🇷 South Korean Won (KRW)</option>
+                <option value="INR">🇮🇳 Indian Rupee (INR)</option>
+                <option value="PHP">🇵🇭 Philippine Peso (PHP)</option>
+            </select>
+        </section>
+
+        <main class="currency-content">
+            <section class="currency-hero">
+                <div class="hero-image">
+                    <img id="currencyImage" src="https://images.unsplash.com/photo-1554672678-f18c2eeb5fb6?w=800&h=400&fit=crop" alt="Currency Image" />
+                </div>
+                <div class="hero-overlay">
+                    <h2 id="currencyTitle">Indonesian Rupiah</h2>
+                    <p id="currencySubtitle">The official currency of Indonesia</p>
+                </div>
+            </section>
+
+            <div class="content-grid">
+                <section class="content-section overview">
+                    <img id="overviewImage" src="https://images.unsplash.com/photo-1559526324-4b87b5e36e44?w=600&h=220&fit=crop" alt="Overview" class="section-image">
+                    <h3>💰 Overview</h3>
+                    <p id="currencyOverview">The Indonesian Rupiah is the official currency of Indonesia, managed by Bank Indonesia. The rupiah is subdivided into 100 sen, though coins for sen are no longer in circulation. It's one of the most traded currencies in Southeast Asia and plays a crucial role in the regional economy.</p>
+                </section>
+                <section class="content-section history">
+                    <img id="historyImage" src="https://images.unsplash.com/photo-1553729459-efe14ef6055d?w=600&h=220&fit=crop" alt="History" class="section-image">
+                    <h3>📜 Historical Background</h3>
+                    <p id="currencyHistory">The rupiah was first introduced in 1946, replacing the Japanese occupation currency. Its name derives from the Indian rupee, reflecting historical trade connections. The currency has undergone several redenominations and reforms, particularly after Indonesia's independence and during economic crises.</p>
+                </section>
+                <section class="content-section cultural">
+                    <img id="culturalImage" src="https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=600&h=220&fit=crop" alt="Cultural Significance" class="section-image">
+                    <h3>🎨 Cultural Significance</h3>
+                    <p id="currencyCultural">Indonesian currency features national heroes, cultural landmarks, and traditional arts. The designs showcase Indonesia's rich cultural diversity, including Javanese temples, traditional dances, and important historical figures who fought for independence.</p>
+                </section>
+                <section class="content-section economic">
+                    <img id="economicImage" src="https://images.unsplash.com/photo-1590283603385-17ffb3a7f29f?w=600&h=220&fit=crop" alt="Economic Impact" class="section-image">
+                    <h3>📈 Economic Impact</h3>
+                    <p id="currencyEconomic">As the currency of the world's fourth most populous country, the rupiah significantly impacts global trade, especially in commodities like palm oil, coal, and rubber. Bank Indonesia maintains monetary policy to ensure stability and support economic growth.</p>
+                </section>
+                <section class="content-section design">
+                    <img id="designImage" src="https://images.unsplash.com/photo-1563013544-824ae1b704d3?w=600&h=220&fit=crop" alt="Design & Security" class="section-image">
+                    <h3>🎭 Design & Security</h3>
+                    <p id="currencyDesign">Modern Indonesian banknotes incorporate advanced security features including watermarks, security threads, and color-changing inks. The artistic designs celebrate Indonesia's natural beauty, from traditional batik patterns to endemic flora and fauna.</p>
+                </section>
+                <section class="content-section fun-facts">
+                    <img id="funFactsImage" src="https://images.unsplash.com/photo-1607863680198-23d4b2565df0?w=600&h=220&fit=crop" alt="Interesting Facts" class="section-image">
+                    <h3>🌟 Interesting Facts</h3>
+                    <ul id="currencyFunFacts">
+                        <li>Indonesia once had a 1,000,000 rupiah note during hyperinflation</li>
+                        <li>The smallest denomination still in use is 100 rupiah</li>
+                        <li>Rupiah banknotes feature both national heroes and cultural landmarks</li>
+                        <li>The currency symbol is "Rp" from the Dutch word "roepiah"</li>
+                        <li>Indonesia is moving towards digital payments, reducing cash usage</li>
+                    </ul>
+                </section>
+            </div>
+
+            <section class="image-gallery">
+                <h3>📸 Currency Gallery</h3>
+                <div class="gallery-grid" id="currencyGallery">
+                    <div class="gallery-item">
+                        <img src="https://images.unsplash.com/photo-1554672678-f18c2eeb5fb6?w=300&h=160&fit=crop" alt="Indonesian Banknotes">
+                        <div class="gallery-caption">Modern IDR Notes</div>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="https://images.unsplash.com/photo-1606891780945-00d95c15d024?w=300&h=160&fit=crop" alt="Bank Indonesia">
+                        <div class="gallery-caption">Bank Indonesia</div>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=300&h=160&fit=crop" alt="Cultural Heritage">
+                        <div class="gallery-caption">Cultural Heritage</div>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="https://images.unsplash.com/photo-1559526324-4b87b5e36e44?w=300&h=160&fit=crop" alt="Indonesian Market">
+                        <div class="gallery-caption">Traditional Market</div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+    <script src="facts.js"></script>
+</body>
+</html>

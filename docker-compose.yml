@@ -1,0 +1,49 @@
+version: '3.8'
+
+services:
+  # Backend Service (Flask API)
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: currency-converter-backend
+    ports:
+      - "5000:5000"
+    environment:
+      - FLASK_ENV=production
+      - FLASK_APP=app.py
+    restart: unless-stopped
+    networks:
+      - currency-converter-network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:5000/"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
+  # Frontend Service (Nginx)
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: currency-converter-frontend
+    ports:
+      - "3000:80"
+    depends_on:
+      - backend
+    restart: unless-stopped
+    networks:
+      - currency-converter-network
+    environment:
+      - NGINX_HOST=localhost
+      - NGINX_PORT=80
+
+networks:
+  currency-converter-network:
+    driver: bridge
+    name: currency-converter-net
+
+volumes:
+  currency-data:
+    name: currency-converter-data
