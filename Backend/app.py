@@ -31,7 +31,6 @@ SUPPORTED_CURRENCIES = {
 
 @app.route('/', methods=['GET'])
 def home():
-    """Home endpoint untuk testing"""
     return jsonify({
         'message': 'Currency Converter API',
         'status': 'running',
@@ -40,7 +39,6 @@ def home():
 
 @app.route('/currencies', methods=['GET'])
 def get_currencies():
-    """Endpoint untuk mendapatkan daftar mata uang yang didukung"""
     return jsonify({
         'currencies': SUPPORTED_CURRENCIES,
         'total': len(SUPPORTED_CURRENCIES)
@@ -48,15 +46,6 @@ def get_currencies():
 
 @app.route('/convert', methods=['POST'])
 def convert_currency():
-    """
-    Endpoint untuk konversi mata uang
-    Expected JSON body:
-    {
-        "amount": 100,
-        "from_currency": "USD",
-        "to_currency": "IDR"
-    }
-    """
     try:
         # Validasi request body
         data = request.get_json()
